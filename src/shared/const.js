@@ -1,0 +1,1 @@
+export const DOMAIN='http://localhost:6240/api/';
