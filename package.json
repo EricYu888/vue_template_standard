@@ -13,6 +13,7 @@
     "babel-polyfill": "^6.23.0",
     "crypto-js": "^3.1.9-1",
     "element-ui": "^2.4.5",
+    "js-cookie": "^2.2.0",
     "jshint": "^2.9.7",
     "jsonwebtoken": "^8.5.1",
     "mavon-editor": "^2.5.4",
@@ -22,7 +23,8 @@
     "vue-router": "^3.0.2",
     "vue-schart": "^1.0.0",
     "vue2-bootstrap-modal": "^0.1.15",
-    "vuedraggable": "^2.16.0"
+    "vuedraggable": "^2.16.0",
+    "vuex": "^3.1.1"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",

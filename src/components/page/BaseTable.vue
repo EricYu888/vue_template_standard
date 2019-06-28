@@ -3,7 +3,8 @@
     <div class="crumbs">
       <el-breadcrumb separator="/">
         <el-breadcrumb-item>
-          <i class="el-icon-lx-cascades"></i> 雨水管理
+          <i class="el-icon-lx-cascades"></i>
+          雨水管理 {{userName}}
         </el-breadcrumb-item>
       </el-breadcrumb>
     </div>
@@ -16,6 +17,8 @@
         </el-select>
         <el-input v-model="select_word" placeholder="筛选关键词" class="handle-input mr10"></el-input>
         <el-button type="primary" icon="search" @click="search">搜索</el-button>
+        <el-button type="success" @click="doTest">Vuex Test</el-button>
+        <el-button type="success" @click="doCheck">Vuex Get</el-button>
       </div>
       <el-table
         :data="tableData"
@@ -91,6 +94,7 @@ export default {
   data() {
     return {
       // url: './static/vuetable.json',
+    
       tableData: [],
       cur_page: 1,
       multipleSelection: [],
@@ -144,12 +148,16 @@ export default {
       //         }
       //     }
       // })
+    },
+    userName() {
+      return this.$store.state.user.userName;
     }
   },
   methods: {
     // 分页导航
     handleCurrentChange(val) {
-      this.cur_page = val;
+      console.log(val);
+      this.pageNumber = val;
       this.getData();
     },
     // 获取 easy-mock 的模拟数据
@@ -162,6 +170,7 @@ export default {
         pageNumber: this.pageNumber,
         pageSize: 10
       };
+      console.log(params);
       rainApi
         .getAllRain(params)
         .then(result => {
@@ -171,15 +180,6 @@ export default {
           }
         })
         .catch(err => {});
-      // 开发环境使用 easy-mock 数据，正式环境使用 json 文件
-      // if (process.env.NODE_ENV === 'development') {
-      //     this.url = '/ms/table/list';
-      // };
-      // this.$axios.post(this.url, {
-      //     page: this.cur_page
-      // }).then((res) => {
-      //     this.tableData = res.data.list;
-      // })
     },
     search() {
       this.is_search = true;
@@ -221,11 +221,9 @@ export default {
     saveEdit() {
       this.$refs.form.validate(valid => {
         if (valid) {
-            console.log(valid)
-        }
-        else
-        {
-            console.log(2222)
+          console.log(valid);
+        } else {
+          console.log(2222);
         }
       });
       //   this.$set(this.tableData, this.idx, this.form);
@@ -237,6 +235,13 @@ export default {
       this.tableData.splice(this.idx, 1);
       this.$message.success("删除成功");
       this.delVisible = false;
+    },
+    doTest() {
+      this.$store.dispatch("getUserName", { id: 1 });
+      
+    },
+    doCheck() {
+      console.log(32);
     }
   }
 };
